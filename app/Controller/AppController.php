@@ -31,52 +31,28 @@ App::uses('Controller', 'Controller');
  * @link		http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
 class AppController extends Controller {
-	public $viewClass = 'Smarty';
-	public $helpers = array(
-		'Session',
-		'Html' => array('className' => 'TwitterBootstrap.BootstrapHtml'),
-		'Form' => array('className' => 'TwitterBootstrap.BootstrapForm'),
-		'Paginator' => array('className' => 'TwitterBootstrap.BootstrapPaginator'),
-	);
-	public $layout = 'user';
+	var $layout = "mainlayout";
+	var $helper = 'MenuHelper';
 	
-	function beforeRender(){
-		// 管理者用レイアウトを呼び出す
-		if ( Configure::read('Routing.prefixes') && !empty($this->params['admin']) ) {
-			$this->layout = 'admin';
-		}
+	var $components = array('Session', 'Cookie'); 
+	function beforeFilter() {
+		$this->_setLanguage(); 
 	}
-	
-	public $components = array(
-		'Session',
-		'Auth' => array(
-			'loginRedirect' => array(
-				"admin"      => true,
-				'controller' => 'homes',
-				'action' => 'index'
-			),
-			'logoutRedirect' => array(
-				'controller' => 'homes',
-				'action' => 'index',
-				'home'
-			),
-			'authenticate' => array(
-				'Form' => array(
-					'passwordHasher' => 'Blowfish'
-				)
-			)
-		)
-	);
-
-	public function beforeFilter() {
-		$this->Auth->allow('index', 'view');
-	}
-	public function isAuthorized($user) {
-		if (isset($user['role']) && $user['role'] === 'admin') {
-			return true;
+	function _setLanguage() {
+		if ($this->Cookie->read('lang') && !$this->Session->check('Config.language')) { 
+			$this->Session->write('Config.language', $this->Cookie->read('lang'));
 		}
-
-		// デフォルトは拒否
-		return false;
+		elseif(isset($this->params->params["named"]['language']) && ($this->params->params["named"]['language'] != $this->Session->read('Config.language'))) { 
+			$this->Session->write('Config.language', $this->params->params["named"]['language']); 
+			$this->Cookie->write('lang', $this->params->params["named"]['language'], false, '1 minutes');
+		} 
 	}
 }
+
+
+
+
+
+
+
+

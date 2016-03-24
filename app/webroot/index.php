@@ -26,7 +26,7 @@ if (!defined('DS')) {
 }
 
 /**
- * These defines should only be edited if you have CakePHP installed in
+ * These defines should only be edited if you have cake installed in
  * a directory layout other than the way it is distributed.
  * When using custom settings be sure to use the DS and do not add a trailing DS.
  */
@@ -62,32 +62,6 @@ if (!defined('APP_DIR')) {
  * /lib/Cake/Console/Templates/skel/webroot/index.php
  */
 //define('CAKE_CORE_INCLUDE_PATH', ROOT . DS . 'lib');
-
-/**
- * This auto-detects CakePHP as a composer installed library.
- * You may remove this if you are not planning to use composer (not recommended, though).
- */
-$vendorPath = ROOT . DS . APP_DIR . DS . 'Vendor' . DS . 'cakephp' . DS . 'cakephp' . DS . 'lib';
-$dispatcher = 'Cake' . DS . 'Console' . DS . 'ShellDispatcher.php';
-if (!defined('CAKE_CORE_INCLUDE_PATH') && file_exists($vendorPath . DS . $dispatcher)) {
-	define('CAKE_CORE_INCLUDE_PATH', $vendorPath);
-}
-
-defined('APL_ENV') || define('APL_ENV', (getenv('APL_ENV') ? getenv('APL_ENV') : 'Production'));
-if (APL_ENV == 'Production') {
-	// 本番サーバー
-	$cake_env = 'Production';
-} elseif (APL_ENV == 'Staging') {
-	// テストサーバー
-	$cake_env = 'Staging';
-} else if (APL_ENV == 'Development') {
-	// ローカル
-	$cake_env = 'Development';
-} else {
-	// その他
-	$cake_env = 'default';
-}
-define('CAKE_ENV', $cake_env);
 
 /**
  * Editing below this line should NOT be necessary.

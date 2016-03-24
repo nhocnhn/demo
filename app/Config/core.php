@@ -17,6 +17,16 @@
  * @since         CakePHP(tm) v 0.2.9
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
+ 
+ /**
+ * Language configuration
+ */
+	Configure::write('Config.language', 'eng');
+	//Configure::write('Config.language', 'vie');
+ 
+ 
+ 
+ 
 
 /**
  * CakePHP Debug Level:
@@ -31,7 +41,7 @@
  * In production mode, flash messages redirect after a time interval.
  * In development mode, you need to click the flash message to continue.
  */
-	//Configure::write('debug', 2);
+	Configure::write('debug', 2);
 
 /**
  * Configure the Error handler used to handle errors for your application. By default
@@ -149,7 +159,7 @@
  *	`manager_index()` and `/manager/controller/index`
  *
  */
-	Configure::write('Routing.prefixes', array('admin'));
+	//Configure::write('Routing.prefixes', array('admin'));
 
 /**
  * Turn off all caching application-wide.
@@ -218,17 +228,16 @@
 	Configure::write('Session', array(
 		'defaults' => 'php'
 	));
-	Configure::write('Session.cookie', 'test');
 
 /**
  * A random string used in security hashing methods.
  */
-	Configure::write('Security.salt', 'EuAxf5GpM1rHJ16ap4HSgAWRWa9PDPSS6HKVGXrs');
+	Configure::write('Security.salt', 'tyhnDYhG93b0qyJfIxfs2guVoUubWwvniR2G0FgaC9mi');
 
 /**
  * A random numeric string (digits only) used to encrypt/decrypt strings.
  */
-	Configure::write('Security.cipherSeed', '43190779674109325942994092531');
+	Configure::write('Security.cipherSeed', '34576859309657453542496749683645');
 
 /**
  * Apply timestamps with the last modified time to static assets (js, css, images).

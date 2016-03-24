@@ -22,6 +22,7 @@ App::uses('ConsoleInputSubcommand', 'Console');
 App::uses('ConsoleOptionParser', 'Console');
 App::uses('ClassRegistry', 'Utility');
 App::uses('File', 'Utility');
+App::uses('ClassRegistry', 'Utility');
 
 /**
  * Base class for command-line utilities for automating programmer chores.
@@ -165,14 +166,6 @@ class Shell extends Object {
  * @var ConsoleInput
  */
 	public $stdin;
-
-/**
- * The number of bytes last written to the output stream
- * used when overwriting the previous message.
- *
- * @var int
- */
-	protected $_lastWritten = 0;
 
 /**
  *  Constructs this Shell instance.
@@ -601,7 +594,7 @@ class Shell extends Object {
  * present in most shells. Using Shell::QUIET for a message means it will always display.
  * While using Shell::VERBOSE means it will only display when verbose output is toggled.
  *
- * @param string|array $message A string or an array of strings to output
+ * @param string|array $message A string or a an array of strings to output
  * @param int $newlines Number of newlines to append
  * @param int $level The message's output level, see above.
  * @return int|bool Returns the number of bytes returned from writing to stdout.
@@ -616,49 +609,16 @@ class Shell extends Object {
 			$currentLevel = Shell::QUIET;
 		}
 		if ($level <= $currentLevel) {
-			$this->_lastWritten = $this->stdout->write($message, $newlines);
-			return $this->_lastWritten;
+			return $this->stdout->write($message, $newlines);
 		}
 		return true;
-	}
-
-/**
- * Overwrite some already output text.
- *
- * Useful for building progress bars, or when you want to replace
- * text already output to the screen with new text.
- *
- * **Warning** You cannot overwrite text that contains newlines.
- *
- * @param array|string $message The message to output.
- * @param int $newlines Number of newlines to append.
- * @param int $size The number of bytes to overwrite. Defaults to the
- *    length of the last message output.
- * @return int|bool Returns the number of bytes returned from writing to stdout.
- */
-	public function overwrite($message, $newlines = 1, $size = null) {
-		$size = $size ? $size : $this->_lastWritten;
-
-		// Output backspaces.
-		$this->out(str_repeat("\x08", $size), 0);
-
-		$newBytes = $this->out($message, 0);
-
-		// Fill any remaining bytes with spaces.
-		$fill = $size - $newBytes;
-		if ($fill > 0) {
-			$this->out(str_repeat(' ', $fill), 0);
-		}
-		if ($newlines) {
-			$this->out($this->nl($newlines), 0);
-		}
 	}
 
 /**
  * Outputs a single or multiple error messages to stderr. If no parameters
  * are passed outputs just a newline.
  *
- * @param string|array $message A string or an array of strings to output
+ * @param string|array $message A string or a an array of strings to output
  * @param int $newlines Number of newlines to append
  * @return void
  * @link http://book.cakephp.org/2.0/en/console-and-shells.html#Shell::err
