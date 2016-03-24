@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 
 msgid "LanguageName"
-msgstr "vietnamese"
+msgstr "Việt Nam"
 
 msgid "home"
 msgstr "Trang chủ"

@@ -13,7 +13,7 @@
         <div class="th-text pull-right">
           <div class="th-item">
             <div class="btn-group">
-              <button class="btn btn-default btn-xs dropdown-toggle js-activated" type="button" data-toggle="dropdown"> English <span class="caret"></span> </button>
+              <button class="btn btn-default btn-xs dropdown-toggle js-activated" type="button" data-toggle="dropdown"><?php __('LanguageName')?><span class="caret"></span> </button>
               <ul class="dropdown-menu">
                 <li><?php echo $this->Html->link("ENGLISH",array('language'=>'eng'),array('target' => '_parent', 'escape' => false));;?></li>
                 <li><?php echo $this->Html->link("VIỆT NAM",array('language'=>'vie'),array('target' => '_parent', 'escape' => false));?></li>
