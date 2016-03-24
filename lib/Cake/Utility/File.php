@@ -197,7 +197,7 @@ class File {
 	}
 
 /**
- * Prepares an ASCII string for writing. Converts line endings to the
+ * Prepares a ASCII string for writing. Converts line endings to the
  * correct terminator for the current platform. If Windows, "\r\n" will be used,
  * all other platforms will use "\n"
  *
@@ -393,10 +393,7 @@ class File {
  */
 	public function pwd() {
 		if ($this->path === null) {
-			$dir = $this->Folder->pwd();
-			if (is_dir($dir)) {
-				$this->path = $this->Folder->slashTerm($dir) . $this->name;
-			}
+			$this->path = $this->Folder->slashTerm($this->Folder->pwd()) . $this->name;
 		}
 		return $this->path;
 	}

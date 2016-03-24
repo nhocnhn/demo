@@ -1,5 +1,7 @@
 <?php
 /**
+ * CacheHelper helps create full page view caching.
+ *
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
@@ -22,10 +24,8 @@ App::uses('AppHelper', 'View/Helper');
  * When using CacheHelper you don't call any of its methods, they are all automatically
  * called by View, and use the $cacheAction settings set in the controller.
  *
- * @package Cake.View.Helper
+ * @package       Cake.View.Helper
  * @link http://book.cakephp.org/2.0/en/core-libraries/helpers/cache.html
- * @deprecated This class will be removed in 3.0. You should use a separate response cache
- * like Varnish instead.
  */
 class CacheHelper extends AppHelper {
 
@@ -109,7 +109,6 @@ class CacheHelper extends AppHelper {
  * @param string $out output to cache
  * @return string view output
  * @link http://book.cakephp.org/2.0/en/core-libraries/helpers/cache.html
- * @throws Exception If debug mode is enabled and writing to cache file fails.
  */
 	public function cache($file, $out) {
 		$cacheTime = 0;
@@ -121,7 +120,7 @@ class CacheHelper extends AppHelper {
 			$index = null;
 
 			foreach ($keys as $action) {
-				if ($action === $this->request->params['action']) {
+				if ($action == $this->request->params['action']) {
 					$index = $action;
 					break;
 				}
@@ -154,10 +153,6 @@ class CacheHelper extends AppHelper {
 			try {
 				$this->_writeFile($cached, $cacheTime, $useCallbacks);
 			} catch (Exception $e) {
-				if (Configure::read('debug')) {
-					throw $e;
-				}
-
 				$message = __d(
 					'cake_dev',
 					'Unable to write view cache file: "%s" for "%s"',

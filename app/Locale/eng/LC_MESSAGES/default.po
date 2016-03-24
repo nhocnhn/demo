@@ -1,0 +1,8 @@
+msgid ""
+msgstr ""
+
+msgid "LanguageName"
+msgstr "English"
+
+msgid "home"
+msgstr "Home"

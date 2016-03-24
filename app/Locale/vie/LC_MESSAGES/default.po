@@ -1,0 +1,8 @@
+msgid ""
+msgstr ""
+
+msgid "LanguageName"
+msgstr "Việt Nam"
+
+msgid "home"
+msgstr "Trang chủ"
